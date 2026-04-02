@@ -1,0 +1,28 @@
+class Key {
+  field String name;
+  field boolean broken;
+
+  constructor Key new(String x) {
+    let name = x;
+    let broken = false;
+    return this;
+  }
+
+  method void dispose() {
+    do Memory.deAlloc(this);
+    return;
+  }
+
+  method String getName() {
+    return name;
+  }
+
+  method boolean isBroken() {
+    return broken;
+  }
+
+  method void breakKey() {
+    let broken = true;
+    return;
+  }
+}
