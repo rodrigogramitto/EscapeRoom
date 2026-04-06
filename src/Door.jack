@@ -1,7 +1,7 @@
 class Door {
   field String requiredKey;
   field boolean open;
-  field string name;
+  field String name;
 
   method void dispose() {
     do Memory.deAlloc(this);
@@ -16,7 +16,8 @@ class Door {
   }
 
   method boolean tryOpen(Key key) {
-    if ( key = requiredKey ) {
+    if ( key.getName() = requiredKey ) {
+      key.breakKey();
       let open = true;
     }
     return open;

@@ -1,0 +1,12 @@
+class Main {
+  //   - Create 3 rooms
+  // - Loop: ask for key + door
+  // - Call room.try(...)
+  // - If success: next room
+  // - If all keys broken: lose
+  // - After 3 rooms: win
+
+  function void main() {
+    return;
+  }
+}

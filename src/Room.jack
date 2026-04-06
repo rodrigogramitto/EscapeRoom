@@ -1,0 +1,59 @@
+class Room {
+  field Array keys;
+  field Array doors;
+  field int totalKeys;
+
+  constructor Room new(int numKeys, int numDoors) {
+    let keys = Array.new(numKeys);
+    let doors = Array.new(numDoors);
+    let totalKeys = numKeys;
+    return this;
+  }
+
+  method void setKey(int i, Key key) {
+    let keys[i] = key;
+    return;
+  }
+
+  method void setDoor(int i, Door door) {
+    let doors[i] = door;
+    return;
+  }
+
+  method boolean allKeysBroken(){
+    var Key curKey;
+    var boolean allBroken;
+    var int i;
+
+    let allBroken = true;
+    let i = 0;
+
+    while (i < totalKeys) {
+
+      let curKey = keys[i];
+      if ( ~curKey.isBroken() ) {
+        let allBroken = false;
+      }
+      let i = i + 1;
+
+    }
+    return allBroken;
+  }
+
+  method boolean try(int keyIndex, int doorIndex) {
+    var Key curKey;
+    var Door curDoor;
+
+    let curKey = keys[keyIndex];
+    let curDoor = doors[keyIndex];
+
+    curDoor.tryOpen(curKey);
+    return curDoor.isOpen();
+  }
+
+  method void dispose() {
+    do Memory.deAlloc(this);
+    return;
+  }
+
+}
