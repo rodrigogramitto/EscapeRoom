@@ -1,5 +1,4 @@
 class Door {
-  field int i;
   field boolean open;
   field int id;
   field int requiredKey;

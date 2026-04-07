@@ -33,10 +33,6 @@ label Room_0
     push local 0
     push local 0
     push local 0
-    push argument 1
-    add
-    pop pointer 1
-    push that 0
     call Door.new 2
     call Room.setDoor 3
     pop temp 0
@@ -127,6 +123,15 @@ function Room.try 2
     pop pointer 1
     push that 0
     pop local 1
+    push local 0
+    call Key.isBroken 1
+    not
+    if-goto Room_7
+    push constant 0
+    return
+    goto Room_6
+label Room_7
+label Room_6
     push local 1
     push local 0
     call Door.tryOpen 2
@@ -138,71 +143,4 @@ function Room.dispose 0
     call Memory.deAlloc 1
     pop temp 0
     push constant 0
-    return
-function Room.getKeyId 0
-    push argument 0
-    pop pointer 0
-    push argument 1
-    push constant 6
-    call String.new 1
-    push constant 87
-    call String.appendChar 2
-    push constant 114
-    call String.appendChar 2
-    push constant 101
-    call String.appendChar 2
-    push constant 110
-    call String.appendChar 2
-    push constant 99
-    call String.appendChar 2
-    push constant 104
-    call String.appendChar 2
-    eq
-    not
-    if-goto Room_7
-    push constant 0
-    return
-    goto Room_6
-label Room_7
-label Room_6
-    push argument 1
-    push constant 3
-    call String.new 1
-    push constant 66
-    call String.appendChar 2
-    push constant 97
-    call String.appendChar 2
-    push constant 116
-    call String.appendChar 2
-    eq
-    not
-    if-goto Room_9
-    push constant 1
-    return
-    goto Room_8
-label Room_9
-label Room_8
-    push argument 1
-    push constant 5
-    call String.new 1
-    push constant 68
-    call String.appendChar 2
-    push constant 105
-    call String.appendChar 2
-    push constant 108
-    call String.appendChar 2
-    push constant 100
-    call String.appendChar 2
-    push constant 111
-    call String.appendChar 2
-    eq
-    not
-    if-goto Room_11
-    push constant 2
-    return
-    goto Room_10
-label Room_11
-label Room_10
-    push constant 1
-    neg
     return

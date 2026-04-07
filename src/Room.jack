@@ -14,7 +14,7 @@ class Room {
 
     while ( i < numKeyDoor ) {
       do setKey(i, Key.new(i, keyNames[i]));
-      do setDoor(i, Door.new(i, keyNames[i]));
+      do setDoor(i, Door.new(i, i));
       let i = i + 1;
     }
 
@@ -58,25 +58,16 @@ class Room {
     let curKey = keys[keyIndex];
     let curDoor = doors[doorIndex];
 
+    if ( curKey.isBroken() ) {
+      return false;
+    }
+
     return curDoor.tryOpen(curKey);
   }
 
   method void dispose() {
     do Memory.deAlloc(this);
     return;
-  }
-
-  method int getKeyId(String name) {
-    if (name = "Wrench") {
-      return 0;
-    }
-    if (name = "Bat") {
-      return 1;
-    }
-    if (name = "Dildo") {
-      return 2;
-    }
-    return -1;
   }
 
 }

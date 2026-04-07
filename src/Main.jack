@@ -26,32 +26,30 @@ class Main {
 
     let curRoom = Room.new(3, names);
 
-    while ( ~escaped & ~dead ) {
+    while (~escaped & ~dead) {
+
       do Screen.clearScreen();
-      // let userDoor = 0;
-      // let userKey = "";
 
-      if ( curRoom.allKeysBroken() ) {
-        let dead = true;
+      if (curRoom.allKeysBroken()) {
+          let dead = true;
       } else {
-        let userDoor = Keyboard.readInt("Choose a door");
-        let userKey = Keyboard.readLine("Choose a key: Wrench, Bat or Dildo");
-        let keyId = curRoom.getKeyId( userKey );
 
-        do Output.printString("You have chosen the: " );
-        do Output.printString( userKey );
+          let userDoor = Keyboard.readInt("Choose a door");
+          let keyId = Keyboard.readInt("Choose key (0=Wrench, 1=Bat, 2=Dildo): ");
 
-        do Output.printString("KeyId: ");
-        do Output.printInt( curRoom.getKeyId(userKey));
-
-        if ( keyId = -1 ) {
-          do Output.printString("Invalid key!");
-        } else {
-          let escaped = curRoom.try( keyId, userDoor );
-        }
+          if ((userDoor < 0) | (userDoor > 2)) {
+              do Output.printString("Invalid door!");
+          } else {
+              if ((keyId < 0) | (keyId > 2)) {
+                  do Output.printString("Invalid key!");
+              } else {
+                  let escaped = curRoom.try(keyId, userDoor);
+              }
+          }
       }
 
-    }
+      do Keyboard.readLine("Press enter...");
+  }
 
     if ( dead ) {
       do Output.printString("You have failed to escape the maze, and after an eternity you have died of starvation");
