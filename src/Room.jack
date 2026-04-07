@@ -3,10 +3,21 @@ class Room {
   field Array doors;
   field int totalKeys;
 
-  constructor Room new(int numKeys, int numDoors) {
-    let keys = Array.new(numKeys);
-    let doors = Array.new(numDoors);
-    let totalKeys = numKeys;
+  constructor Room new(int numKeyDoor, Array keyNames) {
+    var int i;
+    var Key curKey;
+    var Door curDoor;
+    let keys = Array.new(numKeyDoor);
+    let doors = Array.new(numKeyDoor);
+    let totalKeys = numKeyDoor;
+    let i = 0;
+
+    while ( i < numKeyDoor ) {
+      do setKey(i, Key.new(i, keyNames[i]));
+      do setDoor(i, Door.new(i, keyNames[i]));
+      let i = i + 1;
+    }
+
     return this;
   }
 
@@ -45,15 +56,27 @@ class Room {
     var Door curDoor;
 
     let curKey = keys[keyIndex];
-    let curDoor = doors[keyIndex];
+    let curDoor = doors[doorIndex];
 
-    curDoor.tryOpen(curKey);
-    return curDoor.isOpen();
+    return curDoor.tryOpen(curKey);
   }
 
   method void dispose() {
     do Memory.deAlloc(this);
     return;
+  }
+
+  method int getKeyId(String name) {
+    if (name = "Wrench") {
+      return 0;
+    }
+    if (name = "Bat") {
+      return 1;
+    }
+    if (name = "Dildo") {
+      return 2;
+    }
+    return -1;
   }
 
 }

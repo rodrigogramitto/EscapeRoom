@@ -1,0 +1,208 @@
+function Room.new 3
+    push constant 3
+    call Memory.alloc 1
+    pop pointer 0
+    push argument 0
+    call Array.new 1
+    pop this 0
+    push argument 0
+    call Array.new 1
+    pop this 1
+    push argument 0
+    pop this 2
+    push constant 0
+    pop local 0
+label Room_0
+    push local 0
+    push argument 0
+    lt
+    not
+    if-goto Room_1
+    push pointer 0
+    push local 0
+    push local 0
+    push local 0
+    push argument 1
+    add
+    pop pointer 1
+    push that 0
+    call Key.new 2
+    call Room.setKey 3
+    pop temp 0
+    push pointer 0
+    push local 0
+    push local 0
+    push local 0
+    push argument 1
+    add
+    pop pointer 1
+    push that 0
+    call Door.new 2
+    call Room.setDoor 3
+    pop temp 0
+    push local 0
+    push constant 1
+    add
+    pop local 0
+    goto Room_0
+label Room_1
+    push pointer 0
+    return
+function Room.setKey 0
+    push argument 0
+    pop pointer 0
+    push argument 1
+    push this 0
+    add
+    push argument 2
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 0
+    return
+function Room.setDoor 0
+    push argument 0
+    pop pointer 0
+    push argument 1
+    push this 1
+    add
+    push argument 2
+    pop temp 0
+    pop pointer 1
+    push temp 0
+    pop that 0
+    push constant 0
+    return
+function Room.allKeysBroken 3
+    push argument 0
+    pop pointer 0
+    push constant 1
+    neg
+    pop local 1
+    push constant 0
+    pop local 2
+label Room_2
+    push local 2
+    push this 2
+    lt
+    not
+    if-goto Room_3
+    push local 2
+    push this 0
+    add
+    pop pointer 1
+    push that 0
+    pop local 0
+    push local 0
+    call Key.isBroken 1
+    not
+    not
+    if-goto Room_5
+    push constant 0
+    pop local 1
+    goto Room_4
+label Room_5
+label Room_4
+    push local 2
+    push constant 1
+    add
+    pop local 2
+    goto Room_2
+label Room_3
+    push local 1
+    return
+function Room.try 2
+    push argument 0
+    pop pointer 0
+    push argument 1
+    push this 0
+    add
+    pop pointer 1
+    push that 0
+    pop local 0
+    push argument 2
+    push this 1
+    add
+    pop pointer 1
+    push that 0
+    pop local 1
+    push local 1
+    push local 0
+    call Door.tryOpen 2
+    return
+function Room.dispose 0
+    push argument 0
+    pop pointer 0
+    push pointer 0
+    call Memory.deAlloc 1
+    pop temp 0
+    push constant 0
+    return
+function Room.getKeyId 0
+    push argument 0
+    pop pointer 0
+    push argument 1
+    push constant 6
+    call String.new 1
+    push constant 87
+    call String.appendChar 2
+    push constant 114
+    call String.appendChar 2
+    push constant 101
+    call String.appendChar 2
+    push constant 110
+    call String.appendChar 2
+    push constant 99
+    call String.appendChar 2
+    push constant 104
+    call String.appendChar 2
+    eq
+    not
+    if-goto Room_7
+    push constant 0
+    return
+    goto Room_6
+label Room_7
+label Room_6
+    push argument 1
+    push constant 3
+    call String.new 1
+    push constant 66
+    call String.appendChar 2
+    push constant 97
+    call String.appendChar 2
+    push constant 116
+    call String.appendChar 2
+    eq
+    not
+    if-goto Room_9
+    push constant 1
+    return
+    goto Room_8
+label Room_9
+label Room_8
+    push argument 1
+    push constant 5
+    call String.new 1
+    push constant 68
+    call String.appendChar 2
+    push constant 105
+    call String.appendChar 2
+    push constant 108
+    call String.appendChar 2
+    push constant 100
+    call String.appendChar 2
+    push constant 111
+    call String.appendChar 2
+    eq
+    not
+    if-goto Room_11
+    push constant 2
+    return
+    goto Room_10
+label Room_11
+label Room_10
+    push constant 1
+    neg
+    return

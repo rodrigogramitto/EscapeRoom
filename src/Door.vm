@@ -1,0 +1,45 @@
+function Door.dispose 0
+    push argument 0
+    pop pointer 0
+    push pointer 0
+    call Memory.deAlloc 1
+    pop temp 0
+    push constant 0
+    return
+function Door.new 0
+    push constant 4
+    call Memory.alloc 1
+    pop pointer 0
+    push argument 0
+    pop this 2
+    push argument 1
+    pop this 3
+    push constant 0
+    pop this 1
+    push pointer 0
+    return
+function Door.tryOpen 0
+    push argument 0
+    pop pointer 0
+    push argument 1
+    call Key.getId 1
+    push this 3
+    eq
+    not
+    if-goto Door_1
+    push constant 1
+    neg
+    pop this 1
+    goto Door_0
+label Door_1
+    push argument 1
+    call Key.breakKey 1
+    pop temp 0
+label Door_0
+    push this 1
+    return
+function Door.isOpen 0
+    push argument 0
+    pop pointer 0
+    push this 1
+    return

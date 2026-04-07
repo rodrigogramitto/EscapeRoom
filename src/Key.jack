@@ -1,9 +1,11 @@
 class Key {
   field String name;
+  field int id;
   field boolean broken;
 
-  constructor Key new(String x) {
-    let name = x;
+  constructor Key new(int x, String y) {
+    let id = x;
+    let name = y;
     let broken = false;
     return this;
   }
@@ -15,6 +17,10 @@ class Key {
 
   method String getName() {
     return name;
+  }
+
+  method int getId() {
+    return id;
   }
 
   method boolean isBroken() {

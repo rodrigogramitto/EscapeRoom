@@ -1,24 +1,26 @@
 class Door {
-  field String requiredKey;
+  field int i;
   field boolean open;
-  field String name;
+  field int id;
+  field int requiredKey;
 
   method void dispose() {
     do Memory.deAlloc(this);
     return;
   }
 
-  constructor Door new(String x, String y) {
-    let name = x;
+  constructor Door new(int x, int y) {
+    let id = x;
     let requiredKey = y;
     let open = false;
     return this;
   }
 
   method boolean tryOpen(Key key) {
-    if ( key.getName() = requiredKey ) {
-      key.breakKey();
+    if ( key.getId() = requiredKey ) {
       let open = true;
+    } else {
+      do key.breakKey();
     }
     return open;
   }

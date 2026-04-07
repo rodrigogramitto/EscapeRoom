@@ -1,4 +1,5 @@
 class Main {
+  field int roomCount;
   //   - Create 3 rooms
   // - Loop: ask for key + door
   // - Call room.try(...)
@@ -7,6 +8,60 @@ class Main {
   // - After 3 rooms: win
 
   function void main() {
+    var Room curRoom;
+    var Array names;
+    var int userDoor;
+    var String userKey;
+    var int keyId;
+    var boolean escaped;
+    var boolean dead;
+
+    let names = Array.new(3);
+    let names[0] = "Wrench";
+    let names[1] = "Bat";
+    let names[2] = "Dildo";
+
+    let escaped = false;
+    let dead = false;
+
+    let curRoom = Room.new(3, names);
+
+    while ( ~escaped & ~dead ) {
+      do Screen.clearScreen();
+      // let userDoor = 0;
+      // let userKey = "";
+
+      if ( curRoom.allKeysBroken() ) {
+        let dead = true;
+      } else {
+        let userDoor = Keyboard.readInt("Choose a door");
+        let userKey = Keyboard.readLine("Choose a key: Wrench, Bat or Dildo");
+        let keyId = curRoom.getKeyId( userKey );
+
+        do Output.printString("You have chosen the: " );
+        do Output.printString( userKey );
+
+        do Output.printString("KeyId: ");
+        do Output.printInt( curRoom.getKeyId(userKey));
+
+        if ( keyId = -1 ) {
+          do Output.printString("Invalid key!");
+        } else {
+          let escaped = curRoom.try( keyId, userDoor );
+        }
+      }
+
+    }
+
+    if ( dead ) {
+      do Output.printString("You have failed to escape the maze, and after an eternity you have died of starvation");
+    }
+
+    if ( escaped ) {
+      do Output.printString("Platos schmatos! This cave ain't got shit on you");
+    }
+
     return;
   }
+
 }
